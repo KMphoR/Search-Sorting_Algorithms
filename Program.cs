@@ -13,45 +13,71 @@ namespace ConsoleAppSort
             int[] array = new int[] { 9, 2, 7, 4, 3, 1, 5, 10, 6, 8 };
             int[] arr = new int[] { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 };
 
-
-            Console.WriteLine("-Good Day,Please choose between the following numbers for your Sorting options - ");
-            Console.WriteLine("1 : Bubble Sort");
-            Console.WriteLine("2 : Quick Sort");
-            Console.WriteLine("3 : Merge Sort");
-            Console.WriteLine(" ");
-
-            Console.WriteLine("-Or choose one of the folowing numbers for your Searching options - ");
-           
-            Console.WriteLine("4 :Linear Search");
-            Console.WriteLine("5 :Binary Search");
-            Console.WriteLine(" ");
-            Console.WriteLine("Please enter your choice");
-            int choice = Convert.ToInt32(Console.ReadLine());
-
-            switch (choice)
+            while (true)
             {
-                case 1:
-                    bubblesort(array);
-                    break;
-                case 2:
-                    quicksort(array, 0, array.Length - 1);
-                    displayArray(array);
-                    break;
-                case 3:
-                    MergeSort(array, 0, array.Length - 1);
-                    displayArray(array);
-                    break;
-                case 4:
-                    
-                    break;
-                case 5:
-                   
-                    break;
-                default:
-                    Console.WriteLine("Invalid input,Number out of scope");
-                    break;
+                Console.Write("-Good Day,Please choose between the following numbers for your Sorting options - \n" +
+                "1 : Bubble Sort \n" +
+                "2 : Quick Sort \n" +
+                "3 : Merge Sort \n" +
+                "\n" +
+                "-Or choose one of the folowing numbers for your Searching options - \n" +
+                "4 :Linear Search \n" +
+                "5 :Binary Search \n" +
+                "\n" +
+                "6 :Exit \n" +
+                "\n" +
+                "Please enter your choice:");
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        bubblesort(array);
+                        break;
+                    case 2:
+                        quicksort(array, 0, array.Length - 1);
+                        displayArray(array);
+                        break;
+                    case 3:
+                        MergeSort(array, 0, array.Length - 1);
+                        displayArray(array);
+                        break;
+                    case 4:
+                        Console.WriteLine("PLEASE ENTER THE VALUE YOU ARE SEARCHING FOR ");
+                        int z = Convert.ToInt32(Console.ReadLine());
+                        bool answer = linearSearch(array, z);
+                        if (answer)
+                        {
+                            Console.WriteLine("The value entered is found \n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The value entered is not found \n");
+                        }
+                        break;
+                    case 5:
+                        Console.WriteLine("PLEASE ENTER THE VALUE YOU ARE SEARCHING FOR ");
+                        int v = Convert.ToInt32(Console.ReadLine());
+                        if (BinarySearch(arr, 0, arr.Length, v) != -1)
+                        {
+                            Console.WriteLine("The value entered is found \n");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The value entered is not found \n");
+                        }
+
+
+                        break;
+                    case 6:
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input,Number out of scope \n");
+                        break;
+                }
+
             }
-            Console.ReadKey();
         }
         public static void displayArray(int[] arr)
         {
@@ -158,5 +184,37 @@ namespace ConsoleAppSort
                 Merge(a, l, m, r);
             }
         }//END OF MERGE SORT METHOD
+        public static bool linearSearch(int[] a, int k)//START LINEAR SEARCH METHOD 
+        {
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i] == k)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }//END OF LINEAR SEARCH METHOD
+        public static int BinarySearch(int[] a, int l, int r, int itofind)//START OF BINARY SEARCH METHOD
+        {
+            if (l<= r)
+            {
+                int m = (l + r) / 2;
+            if (a[m] == itofind) 
+            {
+                return itofind;
+            }
+ 
+            if (a[m] > itofind)
+            {
+            return BinarySearch(a, l, m - 1, itofind);
+            }
+                else
+                {
+    return BinarySearch(a, m + 1, r, itofind);
+                }
+ }
+ return -1;
+ }//END OF BINARY SEARCH METHOD
     }
 }
